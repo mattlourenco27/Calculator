@@ -16,6 +16,12 @@ void close(void) {
 	return;
 }
 
+//This function prints the openning message
+void openCalc(void) {
+	printf("Type a command then give inputs\n"
+			"Type 'help' for a list of commands\n");
+}
+
 //This function displays a message then recieves the response
 void getInput(char *message, char *response) {
 	printf(message);
@@ -29,10 +35,22 @@ int main(int argc, char **argv) {
 
 	//Switch stout to unbuffered mode to fix scan before inputs
 	setvbuf(stdout, 0, _IONBF, 0);
-
+	openCalc();
 	getInput(emptyLine, input);
 
-	printf("%s", input);
+	if (strcmp(strlwr(input), "add") == 0) {
+		printf("1");
+	} else if (strcmp(strlwr(input), "subtract") == 0) {
+		printf("2");
+	} else if (strcmp(strlwr(input), "multiply") == 0) {
+		printf("3");
+	} else if (strcmp(strlwr(input), "divide") == 0) {
+		printf("4");
+	} else if (strcmp(strlwr(input), "help") == 0) {
+		printf("5");
+	} else {
+		printf("6");
+	}
 
 	close();
 	return 0;
