@@ -9,9 +9,9 @@
 #include <string.h>
 #include "quadf.h"
 
-char *EMPTY_LINE = ">> ";
-char *COMMAND_LIST = ""
-	"---------------------------------------------------------\n"
+char* EMPTY_LINE = ">> ";
+char* COMMAND_LIST = ""
+	"-------------------------------------------------------------\n"
 	"Commands:\n"
 	"+ 'add'      -> adds two real decimal numbers\n"
 	"+ 'subtract' -> subtracts two real decimal numbers\n"
@@ -20,38 +20,13 @@ char *COMMAND_LIST = ""
     "+ 'quadf'    -> finds the solution to the quadratic formula\n"
 	"+ 'help'     -> display a list of commands\n"
     "+ '(q) exit' -> exits the calculator\n"
-	"---------------------------------------------------------";
+	"-------------------------------------------------------------";
 
-//This funtion runs the closing procedure
-void close(void) {
-	printf("Press ENTER key to Continue...");
-	getchar();
-}
-
-//This function prints the openning message
-void openCalc(void) {
-	printf("Terminal Caculator v1.0: Welcome!\n%s", COMMAND_LIST);
-}
-
-//This function displays a message then recieves the response
-void getInput(char *message, char *response) {
-	printf("\n%s", message);
-	gets(response);
-}
-
-//This function gets two real number inputs
-void get2RealNum(double* n1, double* n2) {
-	printf("%sEnter two numbers:\n%s", EMPTY_LINE, EMPTY_LINE);
-	scanf("%lf%lf", n1, n2);
-	getchar(); //Catches stray newline
-}
-
-//This function gets three real number inputs
-void get3RealNum(double* n1, double* n2, double *n3) {
-    printf("%sEnter three numbers:\n%s", EMPTY_LINE, EMPTY_LINE);
-    scanf("%lf%lf%lf", n1, n2, n3);
-    getchar(); //Catches stray newline
-}
+void close(void);
+void openCalc(void);
+void getInput(char*, char*);
+void get2RealNum(double*, double*);
+void get3RealNum(double*, double*, double*);
 
 int main(int argc, char **argv) {
 	unsigned int MAX_INPUT_CHARACTERS = 256;
@@ -106,4 +81,34 @@ int main(int argc, char **argv) {
     }
 	close();
 	return 0;
+}
+
+//This funtion runs the closing procedure
+void close(void) {
+    printf("%sExiting . . .", EMPTY_LINE);
+}
+
+//This function prints the openning message
+void openCalc(void) {
+    printf("Terminal Caculator v1.0: Welcome!\n%s", COMMAND_LIST);
+}
+
+//This function displays a message then recieves the response
+void getInput(char* message, char* response) {
+    printf("\n%s", message);
+    gets(response);
+}
+
+//This function gets two real number inputs
+void get2RealNum(double* n1, double* n2) {
+    printf("%sEnter two numbers:\n%s", EMPTY_LINE, EMPTY_LINE);
+    scanf("%lf%lf", n1, n2);
+    getchar(); //Catches stray newline
+}
+
+//This function gets three real number inputs
+void get3RealNum(double* n1, double* n2, double* n3) {
+    printf("%sEnter three numbers:\n%s", EMPTY_LINE, EMPTY_LINE);
+    scanf("%lf%lf%lf", n1, n2, n3);
+    getchar(); //Catches stray newline
 }
