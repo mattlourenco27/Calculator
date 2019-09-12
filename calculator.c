@@ -17,6 +17,7 @@ char *COMMAND_LIST = ""
 	"+ 'subtract' -> subtracts two real decimal numbers\n"
 	"+ 'multiply' -> multiplies two real decimal numbers\n"
 	"+ 'divide'   -> divides two real decimal numbers\n"
+    "+ 'quadf'    -> finds the solution to the quadratic formula\n"
 	"+ 'help'     -> display a list of commands\n"
     "+ '(q) exit' -> exits the calculator\n"
 	"---------------------------------------------------------";
@@ -38,17 +39,24 @@ void getInput(char *message, char *response) {
 	gets(response);
 }
 
-//This function gets the two real number inputs
-void getRealNum(double* n1, double* n2) {
+//This function gets two real number inputs
+void get2RealNum(double* n1, double* n2) {
 	printf("%sEnter two numbers:\n%s", EMPTY_LINE, EMPTY_LINE);
 	scanf("%lf%lf", n1, n2);
 	getchar(); //Catches stray newline
 }
 
+//This function gets three real number inputs
+void get3RealNum(double* n1, double* n2, double *n3) {
+    printf("%sEnter three numbers:\n%s", EMPTY_LINE, EMPTY_LINE);
+    scanf("%lf%lf%lf", n1, n2, n3);
+    getchar(); //Catches stray newline
+}
+
 int main(int argc, char **argv) {
 	unsigned int MAX_INPUT_CHARACTERS = 256;
 	char input[MAX_INPUT_CHARACTERS + 1];
-	double n1, n2; //Two number inputs
+	double n1, n2, n3; //Three number inputs
 
 	//Switch stout to unbuffered mode to fix scan before inputs
 	setvbuf(stdout, 0, _IONBF, 0);
@@ -62,7 +70,9 @@ int main(int argc, char **argv) {
            strcmp(strlwr(input), "subtract") == 0 ||
            strcmp(strlwr(input), "multiply") == 0 ||
            strcmp(strlwr(input), "divide") == 0) {
-        	getRealNum(&n1, &n2);
+        	get2RealNum(&n1, &n2);
+        } else if (strcmp(strlwr(input), "quadf") == 0) {
+            get3RealNum(&n1, &n2, &n3);
         }
         
         if (strcmp(strlwr(input), "add") == 0) {
@@ -82,6 +92,8 @@ int main(int argc, char **argv) {
         		double quotient = n1 / n2;
         		printf("%s%lf", EMPTY_LINE, quotient);
         	}
+        } else if (strcmp(strlwr(input), "quadf") == 0) {
+            pquadf(n1, n2, n3);
         } else if (strcmp(strlwr(input), "help") == 0) {
         	printf(COMMAND_LIST);
         } else if (strcmp(strlwr(input), "exit") == 0 ||
