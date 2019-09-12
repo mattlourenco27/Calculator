@@ -9,6 +9,8 @@
 #include <string.h>
 #include "quadf.h"
 
+char *emptyLine = ">> ";
+
 //This funtion runs the closing procedure
 void close(void) {
 	printf("\nPress ENTER key to Continue...");
@@ -28,20 +30,36 @@ void getInput(char *message, char *response) {
 	gets(response);
 }
 
+//This function gets the two real number inputs
+void getRealNum(double* n1, double* n2) {
+	printf("%sEnter two numbers:\n%s", emptyLine, emptyLine);
+	scanf("%lf%lf", n1, n2);
+	getchar(); //Catches stray newline
+}
+
 int main(int argc, char **argv) {
 	unsigned int MAX_INPUT_CHARACTERS = 256;
 	char input[MAX_INPUT_CHARACTERS + 1];
-	char *emptyLine = ">> ";
+	double n1, n2; //Two number inputs
 
 	//Switch stout to unbuffered mode to fix scan before inputs
 	setvbuf(stdout, 0, _IONBF, 0);
 	openCalc();
 	getInput(emptyLine, input);
 
+	if(strcmp(strlwr(input), "add") == 0 ||
+	   strcmp(strlwr(input), "subtract") == 0 ||
+	   strcmp(strlwr(input), "multiply") == 0 ||
+	   strcmp(strlwr(input), "divide") == 0) {
+		getRealNum(&n1, &n2);
+	}
+
 	if (strcmp(strlwr(input), "add") == 0) {
-		printf("1");
+		double sum = n1 + n2;
+		printf("%s%lf", emptyLine, sum);
 	} else if (strcmp(strlwr(input), "subtract") == 0) {
-		printf("2");
+		double diff = n1 - n2;
+		printf("%s%lf", emptyLine, diff);
 	} else if (strcmp(strlwr(input), "multiply") == 0) {
 		printf("3");
 	} else if (strcmp(strlwr(input), "divide") == 0) {
