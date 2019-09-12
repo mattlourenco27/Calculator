@@ -64,7 +64,12 @@ int main(int argc, char **argv) {
 		double prod = n1 * n2;
 		printf("%s%lf", emptyLine, prod);
 	} else if (strcmp(strlwr(input), "divide") == 0) {
-		printf("4");
+		if(n2 == 0) {
+			printf("%sDivision by zero: Nan", emptyLine); //Catch dvision by zero
+		} else {
+			double quotient = n1 / n2;
+			printf("%s%lf", emptyLine, quotient);
+		}
 	} else if (strcmp(strlwr(input), "help") == 0) {
 		printf("5");
 	} else {
