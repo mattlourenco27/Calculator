@@ -18,23 +18,23 @@ char *COMMAND_LIST = ""
 	"+ 'multiply' -> multiplies two real decimal numbers\n"
 	"+ 'divide'   -> divides two real decimal numbers\n"
 	"+ 'help'     -> display a list of commands\n"
+    "+ '(q) exit' -> exits the calculator\n"
 	"---------------------------------------------------------";
 
 //This funtion runs the closing procedure
 void close(void) {
-	printf("\nPress ENTER key to Continue...");
+	printf("Press ENTER key to Continue...");
 	getchar();
-	return;
 }
 
 //This function prints the openning message
 void openCalc(void) {
-	printf("Caculator v1.0: Welcome!\n%s\n", COMMAND_LIST);
+	printf("Terminal Caculator v1.0: Welcome!\n%s", COMMAND_LIST);
 }
 
 //This function displays a message then recieves the response
 void getInput(char *message, char *response) {
-	printf(message);
+	printf("\n%s", message);
 	gets(response);
 }
 
@@ -53,37 +53,45 @@ int main(int argc, char **argv) {
 	//Switch stout to unbuffered mode to fix scan before inputs
 	setvbuf(stdout, 0, _IONBF, 0);
 	openCalc();
-	getInput(EMPTY_LINE, input);
+	
+	while (true) {
 
-	if(strcmp(strlwr(input), "add") == 0 ||
-	   strcmp(strlwr(input), "subtract") == 0 ||
-	   strcmp(strlwr(input), "multiply") == 0 ||
-	   strcmp(strlwr(input), "divide") == 0) {
-		getRealNum(&n1, &n2);
-	}
-
-	if (strcmp(strlwr(input), "add") == 0) {
-		double sum = n1 + n2;
-		printf("%s%lf", EMPTY_LINE, sum);
-	} else if (strcmp(strlwr(input), "subtract") == 0) {
-		double diff = n1 - n2;
-		printf("%s%lf", EMPTY_LINE, diff);
-	} else if (strcmp(strlwr(input), "multiply") == 0) {
-		double prod = n1 * n2;
-		printf("%s%lf", EMPTY_LINE, prod);
-	} else if (strcmp(strlwr(input), "divide") == 0) {
-		if(n2 == 0) {
-			printf("%sDivision by zero: Nan", EMPTY_LINE); //Catch dvision by zero
-		} else {
-			double quotient = n1 / n2;
-			printf("%s%lf", EMPTY_LINE, quotient);
-		}
-	} else if (strcmp(strlwr(input), "help") == 0) {
-		printf(COMMAND_LIST);
-	} else {
-		printf("6");
-	}
-
+        getInput(EMPTY_LINE, input);
+        
+        if (strcmp(strlwr(input), "add") == 0 ||
+           strcmp(strlwr(input), "subtract") == 0 ||
+           strcmp(strlwr(input), "multiply") == 0 ||
+           strcmp(strlwr(input), "divide") == 0) {
+        	getRealNum(&n1, &n2);
+        }
+        
+        if (strcmp(strlwr(input), "add") == 0) {
+        	double sum = n1 + n2;
+        	printf("%s%lf", EMPTY_LINE, sum);
+        } else if (strcmp(strlwr(input), "subtract") == 0) {
+        	double diff = n1 - n2;
+        	printf("%s%lf", EMPTY_LINE, diff);
+        } else if (strcmp(strlwr(input), "multiply") == 0) {
+        	double prod = n1 * n2;
+        	printf("%s%lf", EMPTY_LINE, prod);
+        } else if (strcmp(strlwr(input), "divide") == 0) {
+        	if(n2 == 0) {
+                //Catch dvision by zero
+        		printf("%sDivision by zero: Nan", EMPTY_LINE);
+        	} else {
+        		double quotient = n1 / n2;
+        		printf("%s%lf", EMPTY_LINE, quotient);
+        	}
+        } else if (strcmp(strlwr(input), "help") == 0) {
+        	printf(COMMAND_LIST);
+        } else if (strcmp(strlwr(input), "exit") == 0 ||
+                   strcmp(strlwr(input), "q") == 0) {
+            break;
+        } else {
+        	printf("%sInvalid Command: Type 'help' for a list of commands", 
+                   EMPTY_LINE);
+        }
+    }
 	close();
 	return 0;
 }
