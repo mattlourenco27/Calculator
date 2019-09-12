@@ -9,7 +9,16 @@
 #include <string.h>
 #include "quadf.h"
 
-char *emptyLine = ">> ";
+char *EMPTY_LINE = ">> ";
+char *COMMAND_LIST = ""
+	"---------------------------------------------------------\n"
+	"Commands:\n"
+	"+ 'add'      -> adds two real decimal numbers\n"
+	"+ 'subtract' -> subtracts two real decimal numbers\n"
+	"+ 'multiply' -> multiplies two real decimal numbers\n"
+	"+ 'divide'   -> divides two real decimal numbers\n"
+	"+ 'help'     -> display a list of commands\n"
+	"---------------------------------------------------------";
 
 //This funtion runs the closing procedure
 void close(void) {
@@ -20,8 +29,7 @@ void close(void) {
 
 //This function prints the openning message
 void openCalc(void) {
-	printf("Type a command then give inputs\n"
-			"Type 'help' for a list of commands\n");
+	printf("Caculator v1.0: Welcome!\n%s\n", COMMAND_LIST);
 }
 
 //This function displays a message then recieves the response
@@ -32,7 +40,7 @@ void getInput(char *message, char *response) {
 
 //This function gets the two real number inputs
 void getRealNum(double* n1, double* n2) {
-	printf("%sEnter two numbers:\n%s", emptyLine, emptyLine);
+	printf("%sEnter two numbers:\n%s", EMPTY_LINE, EMPTY_LINE);
 	scanf("%lf%lf", n1, n2);
 	getchar(); //Catches stray newline
 }
@@ -45,7 +53,7 @@ int main(int argc, char **argv) {
 	//Switch stout to unbuffered mode to fix scan before inputs
 	setvbuf(stdout, 0, _IONBF, 0);
 	openCalc();
-	getInput(emptyLine, input);
+	getInput(EMPTY_LINE, input);
 
 	if(strcmp(strlwr(input), "add") == 0 ||
 	   strcmp(strlwr(input), "subtract") == 0 ||
@@ -56,22 +64,22 @@ int main(int argc, char **argv) {
 
 	if (strcmp(strlwr(input), "add") == 0) {
 		double sum = n1 + n2;
-		printf("%s%lf", emptyLine, sum);
+		printf("%s%lf", EMPTY_LINE, sum);
 	} else if (strcmp(strlwr(input), "subtract") == 0) {
 		double diff = n1 - n2;
-		printf("%s%lf", emptyLine, diff);
+		printf("%s%lf", EMPTY_LINE, diff);
 	} else if (strcmp(strlwr(input), "multiply") == 0) {
 		double prod = n1 * n2;
-		printf("%s%lf", emptyLine, prod);
+		printf("%s%lf", EMPTY_LINE, prod);
 	} else if (strcmp(strlwr(input), "divide") == 0) {
 		if(n2 == 0) {
-			printf("%sDivision by zero: Nan", emptyLine); //Catch dvision by zero
+			printf("%sDivision by zero: Nan", EMPTY_LINE); //Catch dvision by zero
 		} else {
 			double quotient = n1 / n2;
-			printf("%s%lf", emptyLine, quotient);
+			printf("%s%lf", EMPTY_LINE, quotient);
 		}
 	} else if (strcmp(strlwr(input), "help") == 0) {
-		printf("5");
+		printf(COMMAND_LIST);
 	} else {
 		printf("6");
 	}
