@@ -11,6 +11,4 @@ This calculator impliments:
 * Subtraction
 * Multiplication
 * Division
-* Exponents
-* Logarithms
 * Quadratic Formula
