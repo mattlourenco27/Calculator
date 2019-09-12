@@ -61,7 +61,8 @@ int main(int argc, char **argv) {
 		double diff = n1 - n2;
 		printf("%s%lf", emptyLine, diff);
 	} else if (strcmp(strlwr(input), "multiply") == 0) {
-		printf("3");
+		double prod = n1 * n2;
+		printf("%s%lf", emptyLine, prod);
 	} else if (strcmp(strlwr(input), "divide") == 0) {
 		printf("4");
 	} else if (strcmp(strlwr(input), "help") == 0) {
